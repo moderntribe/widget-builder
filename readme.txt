@@ -3,8 +3,8 @@ Contributors: ModernTribe, codearachnid, peterchester, jbrinley
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=R8H3DD84PWAQ2
 Tags: widget, featured image, simple, sidebar, admin, custom post type, CPT, widget-only, dashboard, dashboard widget
 Requires at least: 3.0
-Tested up to: 3.4.1
-Stable tag: 1.4
+Tested up to: 3.4.2
+Stable tag: 1.5
 
 == Description ==
 
@@ -17,6 +17,8 @@ Widget Builder uses native WordPress editing interface to provide a unique tool 
 * Customize "Read More" link text
 * Very versatile. All fields are optional.
 * Supports override of template so that you can override the template for your theme!
+
+Tested on PHP 5.2.17, 5.3.14 & 5.4.4 and WP 3.3 & 3.4.
 
 This plugin is actively supported and we will do our best to help you. In return we simply as 3 things:
 

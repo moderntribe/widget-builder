@@ -26,6 +26,7 @@ if ( !class_exists( 'Tribe_Widget_Builder' ) ) {
 		const TOKEN = self::POST_TYPE;
 
 		private $base_path;
+		private $php52_safe_widgets;
 
 		/**
 		 *
@@ -141,21 +142,44 @@ if ( !class_exists( 'Tribe_Widget_Builder' ) ) {
 				if( ! $widget['disable_sidebar'] )
 					tribe_register_widget('Tribe_Widget_Builder_Display', $widget);
 
-				// add dashboard widget
+				// add dashboard widget && protect 5.2 compatibility
 				if( is_admin() && $widget['dashboard'] ) {
-					add_action( is_multisite() ? 'wp_network_dashboard_setup' : 'wp_dashboard_setup', function( $widget ) use ( $widget ) { 
-						wp_add_dashboard_widget( $widget['token'] . '-' . $widget['ID'], $widget['title'], function( $widget ) use ( $widget ) { 
-
-							// apply filters
-							$content = apply_filters( 'the_content', empty( $widget['content'] ) ? '' : $widget['content'] );
-							$content = str_replace(']]>', ']]&gt;', $content);
-
-							// get template hierarchy
-							include( Tribe_Widget_Builder::get_template_hierarchy( 'widget_dashboard' ) );
-						});
-					});
+					if (version_compare(PHP_VERSION, '5.3.0', '>')) {
+						include 'wp_add_dashboard_widget.php';
+					} else {
+						// at some point this will be deprecated when 5.2.4 is dropped by WP core
+						$this->php52_safe_widgets[] = $widget;
+					}
 				}
 			}
+			// if php 5.2 safe widgets are available lets load them
+			if( !empty($this->php52_safe_widgets) )
+				add_action( is_multisite() ? 'wp_network_dashboard_setup' : 'wp_dashboard_setup', array($this,'php52_safe_dashboard_widget'));
+		}
+
+		// this is php 5.2 safe
+		public function php52_safe_dashboard_widget(){
+			foreach( $this->php52_safe_widgets as $safe_widget) {
+				wp_add_dashboard_widget( $safe_widget['token'] . '-' . $safe_widget['ID'], $safe_widget['title'], array($this, 'php52_safe_widget'));
+			}
+		}
+		// this is php 5.2 safe
+		public function php52_safe_widget(){
+			$widget = $this->php52_safe_widgets[0];
+
+			$this->php52_safe_widget_content( $widget );
+
+			unset($this->php52_safe_widgets[0]);
+			$this->php52_safe_widgets = array_values($this->php52_safe_widgets);
+		}
+		// this is php 5.2 safe
+		public function php52_safe_widget_content( $widget ){
+			// apply filters
+			$content = apply_filters( 'the_content', empty( $widget['content'] ) ? '' : $widget['content'] );
+			$content = str_replace(']]>', ']]&gt;', $content);
+
+			// get template hierarchy
+			include( Tribe_Widget_Builder::get_template_hierarchy( 'widget_dashboard' ) );
 		}
 
 		/**
