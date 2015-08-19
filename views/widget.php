@@ -1,6 +1,6 @@
 <?php
 /**
- * Widget template. This template can be overriden using the "sp_template_image-widget_widget.php" filter.
+ * Widget template. This template can be overriden using the "tribe_widget_builder_widget.php" filter.
  * See the readme.txt file for more info.
  */
 

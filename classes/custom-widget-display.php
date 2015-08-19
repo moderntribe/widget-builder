@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Custom Widget Display
  *
@@ -7,8 +6,7 @@
  * multi-instance widgets for posts
  *
  * @author Timothy Wood @codearachnid
- * @version 1.0
- * @copyright Modern Tribe, Inc. 2012
+ * @copyright Modern Tribe, Inc.
  * @package Tribe_Widget_Builder
  **/
 
@@ -36,6 +34,7 @@ if ( ! class_exists('Tribe_Widget_Builder_Display') ) {
 	class Tribe_Widget_Builder_Display extends WP_Widget {
 
 		var $token;
+		var $widget_builder;
 
 		/**
 		 *
@@ -46,6 +45,10 @@ if ( ! class_exists('Tribe_Widget_Builder_Display') ) {
 		function Tribe_Widget_Builder_Display($param = null) {
 			extract($param);
 			$this->token = $token;
+
+			// new instance of the widget builder class
+			$this->widget_builder = new Tribe_Widget_Builder();
+			$this->widget_builder->load_plugin_text_domain();
 			
 			// blank out the widget description so that it doesn't duplicate the widget title
 			$widget_description = ($widget_description == '') ? ' ' : $widget_description;
@@ -53,9 +56,12 @@ if ( ! class_exists('Tribe_Widget_Builder_Display') ) {
 			// override default post title by filter for customization
 			$title = ( $title != '' ) ? apply_filters('tribe_widget_builder_title', $title) : $title;
 
-			$widget_ops = array( 'classname' => 'widget_' . $this->token . '_' . $ID, 'description' => __($widget_description, $this->token), 'data' => $param );       
+			// allow for class overrides
+			$classname = apply_filters( 'tribe_widget_builder_classes', array( 'widget_' . $this->token . '_' . $ID ) );
+
+			$widget_ops = array( 'classname' => implode(" ", $classname), 'description' => __($widget_description, 'widget-builder'), 'data' => $param );       
 			$control_ops = array( 'width' => 200, 'height' => 200, 'id_base' => 'widget_' . $this->token . '_' . $ID );        
-			parent::__construct( 'widget_' . $this->token . '_' . $ID, __($title, $this->token), $widget_ops, $control_ops );
+			parent::__construct( 'widget_' . $this->token . '_' . $ID, __($title, 'widget-builder'), $widget_ops, $control_ops );
 		}
 
 		/**
@@ -76,9 +82,17 @@ if ( ! class_exists('Tribe_Widget_Builder_Display') ) {
 			$title = apply_filters( 'the_title', empty( $title ) ? '' : $title );
 
 			// get template hierarchy
-			$tribe_widget_builder = new Tribe_Widget_Builder();
-			include( $tribe_widget_builder->get_template_hierarchy( 'widget' ) );
+			include( $this->widget_builder->get_template_hierarchy( 'widget' ) );
 
+		}
+
+		/**
+		 * form function.
+		 * 
+		 * @access public
+		 * @return void
+		 */
+		public function form(){
 		}
 
 	}

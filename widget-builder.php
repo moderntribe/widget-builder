@@ -3,7 +3,7 @@
 Plugin Name:	Widget Builder
 Description:	This plugin creates predefined content widgets that can be used in multiple sidebars while being centrally configured.
 Author:			Timothy Wood, Modern Tribe, Inc.
-Version:		1.0
+Version:		1.1
 Author URI:		http://tri.be
 */
 
@@ -26,7 +26,8 @@ if ( ! function_exists('tribe_load_custom_widget_display') ) {
 		$args = array(
 			'numberposts'  => -1,
 			'post_type'    => $token,
-			'post_status'  => 'publish' );
+			'post_status'  => 'publish'
+		);
 		
 		// filter 'tribe_widget_builder_get_posts_args' to modify the cpt query arguments 
  		$args = apply_filters( $token . '_get_posts_args', $args );
@@ -36,7 +37,7 @@ if ( ! function_exists('tribe_load_custom_widget_display') ) {
 		// filter 'tribe_widget_builder_get_posts' to override the cpt query
 		$available_custom_widgets = apply_filters( $token . '_get_posts', $available_custom_widgets );
 
-		if(count($available_custom_widgets) > 0 ) {
+		if( !empty($available_custom_widgets) ) {
 			foreach($available_custom_widgets as $widget) {
 				$widget_params = array( 
 					'ID' => $widget->ID, 

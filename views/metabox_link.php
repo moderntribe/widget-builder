@@ -14,9 +14,9 @@ foreach ( $fields as $f => $label ) {
 	$saved_value = get_post_meta( $post_id, '_' . $f, true );
 
 	// verify nonce setup
-	$html .= ($html != "") ? '<br /><br />' : '<input type="hidden" name="' . $this->token . '_noonce" id="' . $this->token . '_noonce" value="' . $noonce . '" />';
+	$html .= ($html != "") ? '<br /><br />' : '<input type="hidden" name="' . $this->token . '_nonce" id="' . $this->token . '_nonce" value="' . $nonce . '" />';
 
-	$html .= '<label for="' . $f . '">' . __($label, $this->token ) . '</label>';
+	$html .= '<label for="' . $f . '">' . $label . '</label>';
 	$html .= '<input type="text" id="' . $f . '" name="' . $f . '" value="' . $saved_value . '" size="32" />';
 
 }

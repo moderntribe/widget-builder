@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_i
 Tags: widget, featured image, simple, sidebar, admin, custom post type, CPT
 Requires at least: 3.0
 Tested up to: 3.3.2
-Stable tag: 1.0
+Stable tag: 1.1
 
 == Description ==
 
@@ -66,6 +66,14 @@ The following filters are available for override
 'tribe_widget_builder_get_posts' // change the get_posts() query`
 
 == Changelog ==
+
+= 1.1 =
+
+* CPT admin: remove the preview changes button.
+* CPT admin: remove 'view post' link in update message in the yellow after saving a widget post.
+* Remove publish date or visibility for the widget.
+* Add language support so that people can contribute translations (Please feel free to send us translations)
+* Misc bug fixes.
 
 = 1.0 =
 

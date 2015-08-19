@@ -9,6 +9,6 @@ if ( !defined('ABSPATH') )
 	die('-1');
 
 $saved_value = get_post_meta( $post_id, '_' . $field, true );
-$html = '<label for="' . $field . '">' . __('Widet Description', $this->token ) . '</label><br />';
+$html = '<label for="' . $field . '">' . __( 'Widet Description', 'widget-builder' ) . '</label><br />';
 $html .= '<textarea id="' . $field . '" name="' . $field . '" style="width:100%;" />' . $saved_value . '</textarea>';
 echo $html;
