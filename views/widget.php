@@ -10,10 +10,10 @@ if ( !defined('ABSPATH') )
 
 // build html
 $widget = $before_widget;
+$widget .= ( !empty( $title ) ) ? $before_title . $title . $after_title : '';
 if ( !empty( $image ) ) {
 	$widget .= ( !empty( $link_url ) ) ? '<a href="' . $link_url . '" target="_blank"><img src="' . $image[0] . '" /></a>' : '<img src="' . $image[0] . '" />'; 
 }
-$widget .= ( !empty( $title ) ) ? $before_title . $title . $after_title : '';
 $widget .= $content;
 $widget .= ( !empty( $link_url ) ) ? '<a href="' . $link_url . '" target="_blank">' . $link_text . '</a>' : '';
 $widget .= $after_widget;

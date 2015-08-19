@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Custom Widget Display
  *
@@ -13,22 +14,6 @@
 // Block direct requests
 if ( !defined('ABSPATH') )
 	die();
-
-if ( ! class_exists('Tribe_WP_Widget_Factory') ) {
-	Class Tribe_WP_Widget_Factory extends WP_Widget_Factory {
-
-		/**
-		 * Overload register($widget_class) with ability to pass parameters into widgets
-		 * 
-		 * @access public
-		 * @return void
-		 */
-		function register($widget_class, $param = null) {
-			$this->widgets[$widget_class] = new $widget_class($param);
-		}
-
-	}
-}
 
 if ( ! class_exists('Tribe_Widget_Builder_Display') ) {
 	class Tribe_Widget_Builder_Display extends WP_Widget {
@@ -47,11 +32,10 @@ if ( ! class_exists('Tribe_Widget_Builder_Display') ) {
 			$this->token = $token;
 
 			// new instance of the widget builder class
-			$this->widget_builder = new Tribe_Widget_Builder();
-			$this->widget_builder->load_plugin_text_domain();
-			
+			$this->widget_builder = Tribe_Widget_Builder::get_instance();
+
 			// blank out the widget description so that it doesn't duplicate the widget title
-			$widget_description = ($widget_description == '') ? ' ' : $widget_description;
+			$widget_description = empty($widget_description) ? ' ' : $widget_description;
 
 			// override default post title by filter for customization
 			$title = ( $title != '' ) ? apply_filters('tribe_widget_builder_title', $title) : $title;
@@ -59,26 +43,26 @@ if ( ! class_exists('Tribe_Widget_Builder_Display') ) {
 			// allow for class overrides
 			$classname = apply_filters( 'tribe_widget_builder_classes', array( 'widget_' . $this->token . '_' . $ID ) );
 
-			$widget_ops = array( 'classname' => implode(" ", $classname), 'description' => __($widget_description, 'widget-builder'), 'data' => $param );       
-			$control_ops = array( 'width' => 200, 'height' => 200, 'id_base' => 'widget_' . $this->token . '_' . $ID );        
+			$widget_ops = array( 'classname' => implode(" ", $classname), 'description' => __($widget_description, 'widget-builder'), 'data' => $param );
+			$control_ops = array( 'width' => 200, 'height' => 200, 'id_base' => 'widget_' . $this->token . '_' . $ID );
 			parent::__construct( 'widget_' . $this->token . '_' . $ID, __($title, 'widget-builder'), $widget_ops, $control_ops );
 		}
 
 		/**
 		 * widget function.
-		 * 
+		 *
 		 * @access public
 		 * @return void
 		 */
 		public function widget( $args, $instance ) {
 
 			global $wp_registered_widgets;
-		    extract($args);
-		    extract($wp_registered_widgets[ $widget_id ]['data']);
+			extract($args);
+			extract($wp_registered_widgets[ $widget_id ]['data']);
 
-		    // apply filters
-		    $content = apply_filters( 'the_content', empty( $content ) ? '' : $content );
-		    $content = str_replace(']]>', ']]&gt;', $content);
+			// apply filters
+			$content = apply_filters( 'the_content', empty( $content ) ? '' : $content );
+			$content = str_replace(']]>', ']]&gt;', $content);
 			$title = apply_filters( 'the_title', empty( $title ) ? '' : $title );
 
 			// get template hierarchy
@@ -88,7 +72,7 @@ if ( ! class_exists('Tribe_Widget_Builder_Display') ) {
 
 		/**
 		 * form function.
-		 * 
+		 *
 		 * @access public
 		 * @return void
 		 */

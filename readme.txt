@@ -1,10 +1,10 @@
 === Widget Builder ===
-Contributors: ModernTribe, peterchester, codearachnid, Produced by Modern Tribe, Inc.
+Contributors: ModernTribe, codearachnid, peterchester, jbrinley
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=R8H3DD84PWAQ2
 Tags: widget, featured image, simple, sidebar, admin, custom post type, CPT
 Requires at least: 3.0
 Tested up to: 3.3.2
-Stable tag: 1.1
+Stable tag: 1.2
 
 == Description ==
 
@@ -66,6 +66,12 @@ The following filters are available for override
 'tribe_widget_builder_get_posts' // change the get_posts() query`
 
 == Changelog ==
+
+= 1.2 =
+
+* Integrate into the existing $wp_widget_factory global, respecting the singleton intent
+* Add caching to prevent extra queries on every page load
+* Misc bug fixes
 
 = 1.1 =
 
