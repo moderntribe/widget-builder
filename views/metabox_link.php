@@ -8,17 +8,25 @@
 if ( !defined('ABSPATH') )
 	die('-1');
 
-$html = '';
+$html = '<input type="hidden" name="' . self::TOKEN . '_nonce" id="' . self::TOKEN . '_noonce" value="' . $nonce . '" />';
 
-foreach ( $fields as $f => $label ) {
-	$saved_value = get_post_meta( $post_id, '_' . $f, true );
+$html .= '<p>';
+$html .= sprintf('<label for="%s">%s</label><br />', self::TOKEN.'_link_text', __( 'Link Text', 'widget-builder' ));
+$html .= sprintf('<input type="text" id="%s" name="%s" value="%s" size="32" />', self::TOKEN.'_link_text', self::TOKEN.'_link_text', esc_attr(get_post_meta($post_id, '_'.self::TOKEN.'_link_text', TRUE)));
+$html .= '</p>';
 
-	// verify nonce setup
-	$html .= ($html != "") ? '<br /><br />' : '<input type="hidden" name="' . self::TOKEN . '_nonce" id="' . self::TOKEN . '_noonce" value="' . $nonce . '" />';
+$html .= '<p>';
+$html .= sprintf('<label for="%s">%s</label><br />', self::TOKEN.'_link_url', __( 'Link URL', 'widget-builder' ));
+$html .= sprintf('<input type="text" id="%s" name="%s" value="%s" size="32" />', self::TOKEN.'_link_url', self::TOKEN.'_link_url', esc_attr(get_post_meta($post_id, '_'.self::TOKEN.'_link_url', TRUE)));
+$html .= '</p>';
 
-	$html .= '<label for="' . $f . '">' . $label . '</label>';
-	$html .= '<input type="text" id="' . $f . '" name="' . $f . '" value="' . $saved_value . '" size="32" />';
-
-}
+$html .= '<p>';
+$html .= sprintf('<label for="%s">%s</label><br />', self::TOKEN.'_link_target', __( 'Link Target', 'widget-builder' ));
+$html .= sprintf('<select name="%s" id="%s">', self::TOKEN.'_link_target', self::TOKEN.'_link_target');
+$target = get_post_meta($post_id, '_'.self::TOKEN.'_link_target', TRUE);
+$html .= sprintf('<option value="">%s</option>', __('Open in current window', 'widget-builder'));
+$html .= sprintf('<option value="_blank" %s>%s</option>', selected($target, '_blank', FALSE), __('Open in new window', 'widget-builder'));
+$html .= '</select>';
+$html .= '</p>';
 
 echo $html;

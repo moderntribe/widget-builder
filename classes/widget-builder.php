@@ -203,6 +203,7 @@ if ( !class_exists( 'Tribe_Widget_Builder' ) ) {
 						'image' => ( has_post_thumbnail( $widget->ID ) ) ? wp_get_attachment_image_src( get_post_thumbnail_id( $widget->ID ), 'single-post-thumbnail' ) : null,
 						'link_url' => get_post_meta($widget->ID, '_' . Tribe_Widget_Builder::TOKEN . '_link_url', true),
 						'link_text' => get_post_meta($widget->ID, '_' . Tribe_Widget_Builder::TOKEN . '_link_text', true),
+						'link_target' => get_post_meta($widget->ID, '_' . Tribe_Widget_Builder::TOKEN . '_link_target', true),
 						'widget_description' => get_post_meta($widget->ID, '_' . Tribe_Widget_Builder::TOKEN . '_widget_description', true),
 						'dashboard' => get_post_meta($widget->ID, '_' . Tribe_Widget_Builder::TOKEN . '_dashboard', true),
 						'disable_sidebar' => get_post_meta($widget->ID, '_' . Tribe_Widget_Builder::TOKEN . '_disable_sidebar', true),
@@ -351,12 +352,6 @@ if ( !class_exists( 'Tribe_Widget_Builder' ) ) {
 		public function meta_box_content() {
 
 			global $post_id;
-
-			// setup view fields
-			$fields = array(
-				self::TOKEN . '_link_text' => __( 'Link Text', 'widget-builder' ),
-				self::TOKEN . '_link_url' => __( 'Link URL', 'widget-builder' )
-			);
 			$nonce = wp_create_nonce( plugin_basename(__FILE__) );
 			// get template hierarchy
 			include( $this->get_template_hierarchy( 'metabox_link' ) );
@@ -414,19 +409,16 @@ if ( !class_exists( 'Tribe_Widget_Builder' ) ) {
 			}
 
 			// Authenticated
-			$fields = array( self::TOKEN . '_link_text', self::TOKEN . '_link_url', self::TOKEN . '_widget_description', self::TOKEN . '_dashboard', self::TOKEN . '_disable_sidebar' );
+			$fields = array( self::TOKEN . '_link_text', self::TOKEN . '_link_url', self::TOKEN . '_link_target', self::TOKEN . '_widget_description', self::TOKEN . '_dashboard', self::TOKEN . '_disable_sidebar' );
 
 			// Parse fields for add, update, delete
 			foreach ( $fields as $f ) {
 
-				${$f} = strip_tags(trim($_POST[$f]));
-
-				if ( get_post_meta( $post_id, '_' . $f ) == '' ) {
-					add_post_meta( $post_id, '_' . $f, ${$f}, true );
-				} elseif( ${$f} != get_post_meta( $post_id, '_' . $f, true ) ) {
-					update_post_meta( $post_id, '_' . $f, ${$f} );
-				} elseif ( ${$f} == '' ) {
-					delete_post_meta( $post_id, '_' . $f, get_post_meta( $post_id, '_' . $f, true ) );
+				$value = empty($_POST[$f])?FALSE:strip_tags(trim($_POST[$f]));
+				if ( empty($value) ) {
+					delete_post_meta( $post_id, '_' . $f );
+				} else {
+					update_post_meta( $post_id, '_' . $f, $value );
 				}
 			}
 

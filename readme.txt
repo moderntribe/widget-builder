@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_i
 Tags: widget, featured image, simple, sidebar, admin, custom post type, CPT, widget-only, dashboard, dashboard widget
 Requires at least: 3.0
 Tested up to: 3.4.2
-Stable tag: 1.5
+Stable tag: 1.6
 
 == Description ==
 
@@ -73,6 +73,10 @@ The following filters are available for override
 'tribe_widget_builder_get_posts' // change the get_posts() query`
 
 == Changelog ==
+
+= 1.6 =
+
+* Added option to specify link targets
 
 = 1.4 =
 

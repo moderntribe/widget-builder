@@ -3,7 +3,7 @@
 Plugin Name:	Widget Builder
 Description:	This plugin creates predefined content widgets that can be used in multiple sidebars while being centrally configured.
 Author:			Timothy Wood, Jonathan Brinley, Modern Tribe, Inc.
-Version:		1.5
+Version:		1.6
 Author URI:		http://tri.be
 */
 
