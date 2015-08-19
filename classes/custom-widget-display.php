@@ -76,7 +76,31 @@ if ( ! class_exists('Tribe_Widget_Builder_Display') ) {
 		 * @access public
 		 * @return void
 		 */
-		public function form(){
+		public function form( $instance ){
+
+			$hide_title = isset($instance['hide_widget_title']) ? $instance['hide_widget_title'] : 'show';
+
+			include( $this->widget_builder->get_template_hierarchy( 'widget_options' ) );
+		}
+
+		/**
+		 * update funciton.
+		 * 
+		 * @see WP_Widget::update()
+		 * 
+		 * @access  public
+		 * @param array $new_instance Values just sent to be saved.
+		 * @param array $old_instance Previously saved values from database.
+		 *
+		 * @return array Updated safe values to be saved.
+		 * 
+		 */
+		public function update( $new_instance, $old_instance ) {
+			
+			$instance = array();
+			$instance['hide_widget_title'] = strip_tags( $new_instance['hide_widget_title'] );
+
+			return $instance;
 		}
 
 	}

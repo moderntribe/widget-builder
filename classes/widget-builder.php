@@ -403,16 +403,13 @@ if ( !class_exists( 'Tribe_Widget_Builder' ) ) {
 			// whether or not .php was added
 			$template = rtrim($template, '.php');
 
-			if ( $theme_file = locate_template( array(self::TOKEN . '/' . $template) ) ) {
+			if ( $theme_file = locate_template( array(self::TOKEN . '/' . $template . '.php') ) ) {
 				$file = $theme_file;
-			} else if ( $theme_file = locate_template(array(self::TOKEN . '/' . $template . '_' . $class)) ) {
+			} else if ( $theme_file = locate_template(array(self::TOKEN . '/' . $template . '_' . $class . '.php')) ) {
 				$file = $theme_file;
 			} else {
-				$file = $this->base_path . '/views/' . $template;
+				$file = $this->base_path . '/views/' . $template . '.php';
 			}
-
-			// ensure we have the proper extension
-			$file = $file . '.php';
 
 			return apply_filters( self::TOKEN . '_' . $template, $file, $class);
 		}
@@ -424,7 +421,7 @@ if ( !class_exists( 'Tribe_Widget_Builder' ) ) {
 		 * @return void
 		 */
 		function load_plugin_text_domain() {
-			load_plugin_textdomain( 'widget-builder', false, trailingslashit(basename(dirname(__FILE__))) . 'lang/');
+			load_plugin_textdomain( 'widget-builder', false, trailingslashit( dirname( plugin_basename( dirname(__FILE__) ) ) ) . 'lang/');
 		}
 
 		/**

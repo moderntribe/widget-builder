@@ -1,0 +1,133 @@
+# Copyright (C) 2012 Widget Builder
+# This file is distributed under the same license as the Widget Builder package.
+msgid ""
+msgstr ""
+"Project-Id-Version: Widget Builder en español\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-08-10 09:39+0100\n"
+"PO-Revision-Date: 2012-08-10 09:39+0100\n"
+"Last-Translator: Eduardo Larequi <elarequi@gmail.com>\n"
+"Language-Team: PNTE <blogs@educacion.navarra.es>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: Spanish\n"
+"X-Poedit-Country: Spain\n"
+"X-Poedit-Basepath: ..\n"
+"X-Poedit-KeywordsList: __;_e;_n:1,2;_c;_x:1,2c;esc_attr_e;esc_attr__\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Poedit-SearchPath-0: .\n"
+
+#: classes/widget-builder.php:74
+msgid "Widget content has been updated."
+msgstr "El contenido del widget ha sido actualizado."
+
+#: classes/widget-builder.php:78
+#: classes/widget-builder.php:79
+msgid "Widget has been created."
+msgstr "Se ha creado un nuevo widget."
+
+#: classes/widget-builder.php:93
+msgid "Widget Builder"
+msgstr "Constructor de widgets"
+
+#: classes/widget-builder.php:94
+msgid "Widget"
+msgstr "Widget"
+
+#: classes/widget-builder.php:95
+msgid "Widgets"
+msgstr "Widgets"
+
+#: classes/widget-builder.php:103
+#, php-format
+msgid "%s"
+msgstr "%s"
+
+#: classes/widget-builder.php:104
+#: classes/widget-builder.php:105
+#, php-format
+msgid "Add New %s"
+msgstr "Añadir nuevo %s"
+
+#: classes/widget-builder.php:106
+#, php-format
+msgid "Edit %s"
+msgstr "Editar %s"
+
+#: classes/widget-builder.php:107
+#, php-format
+msgid "New %s"
+msgstr "Nuevo %s"
+
+#: classes/widget-builder.php:109
+#, php-format
+msgid "View %s"
+msgstr "Ver %s"
+
+#: classes/widget-builder.php:110
+msgid "Search %a"
+msgstr "Buscar %a"
+
+#: classes/widget-builder.php:111
+#, php-format
+msgid "No %s Found"
+msgstr "No se ha encontrado ningún %s"
+
+#: classes/widget-builder.php:112
+#, php-format
+msgid "No %s Found In Trash"
+msgstr "No se ha encontrado ningún %s en la papelera"
+
+#: classes/widget-builder.php:251
+#: views/metabox_pub.php:32
+#: views/metabox_pub.php:33
+msgid "Publish"
+msgstr "Publicar"
+
+#: classes/widget-builder.php:261
+msgid "Widget Link Details"
+msgstr "Detalles del enlace del widget"
+
+#: classes/widget-builder.php:271
+msgid "Widget Admin Details"
+msgstr "Detalles de administración del widget"
+
+#: classes/widget-builder.php:315
+msgid "Link Text"
+msgstr "Texto del enlace"
+
+#: classes/widget-builder.php:316
+msgid "Link URL"
+msgstr "URL del enlace"
+
+#: views/metabox_admin.php:12
+msgid "Widget Description"
+msgstr "Descripción del widget"
+
+#: views/metabox_pub.php:19
+msgid "Delete Permanently"
+msgstr "Borrar de forma permanente"
+
+#: views/metabox_pub.php:21
+msgid "Move to Trash"
+msgstr "Mover a la papelera"
+
+#: views/metabox_pub.php:37
+#: views/metabox_pub.php:38
+msgid "Update"
+msgstr "Actualizar"
+
+#~ msgid ""
+#~ "This plugin creates predefined content widgets that can be used in "
+#~ "multiple sidebars while being centrally configured."
+#~ msgstr ""
+#~ "Este plugin crea widgets de contenido predefinido, que se configuran una "
+#~ "sola vez de forma centralizada y se pueden utilizar en múltiples barras "
+#~ "laterales"
+
+#~ msgid "Timothy Wood, Modern Tribe, Inc."
+#~ msgstr "Timothy Wood, Modern Tribe, Inc."
+
+#~ msgid "http://tri.be"
+#~ msgstr "http://tri.be"

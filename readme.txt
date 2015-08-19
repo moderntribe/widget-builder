@@ -1,10 +1,10 @@
 === Widget Builder ===
 Contributors: ModernTribe, codearachnid, peterchester, jbrinley
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=R8H3DD84PWAQ2
-Tags: widget, featured image, simple, sidebar, admin, custom post type, CPT
+Tags: widget, featured image, simple, sidebar, admin, custom post type, CPT, widget-only
 Requires at least: 3.0
 Tested up to: 3.3.2
-Stable tag: 1.2
+Stable tag: 1.3
 
 == Description ==
 
@@ -66,6 +66,13 @@ The following filters are available for override
 'tribe_widget_builder_get_posts' // change the get_posts() query`
 
 == Changelog ==
+
+= 1.3 =
+
+* Added option in widget to turn off display of the header title (props to empathik)
+* Resolved get_template_hierarchy trimming file extension
+* Resolved issue with translation file not being loaded in the /lang folder
+* Added es_ES lang translation thanks to elarequi
 
 = 1.2 =
 
