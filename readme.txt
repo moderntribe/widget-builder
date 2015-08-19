@@ -1,16 +1,17 @@
 === Widget Builder ===
 Contributors: ModernTribe, codearachnid, peterchester, jbrinley
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=R8H3DD84PWAQ2
-Tags: widget, featured image, simple, sidebar, admin, custom post type, CPT, widget-only
+Tags: widget, featured image, simple, sidebar, admin, custom post type, CPT, widget-only, dashboard, dashboard widget
 Requires at least: 3.0
-Tested up to: 3.3.2
-Stable tag: 1.3
+Tested up to: 3.4.1
+Stable tag: 1.4
 
 == Description ==
 
 Widget Builder uses native WordPress editing interface to provide a unique tool to build custom widgets for your site(s).
 
 * MU Compatible
+* Create admin dashboard widgets __NEW!__
 * Link the image
 * Title and Description
 * Customize "Read More" link text
@@ -47,9 +48,13 @@ Please visit the forum for questions or comments: http://WordPress.org/tags/widg
 
 == Documentation ==
 
-The built in template can be overridden by files within your template.
+= Dashboard Widgets =
+
+Select 'Available As Dashboard Widget' in the widget editor to enable a widget as a dashboard widget. If you do not want this widget showing in the available widgets list for sidebar placement, select 'Disable Sidebar Widget'.
 
 = Default vs. Custom Templates =
+
+The built in template can be overridden by files within your template.
 
 The Widget Builder comes with a default template for the widget output. If you would like to alter the widget display code, create a new folder called "tribe_widget_builder" in your template directory and copy over the "views/widget.php" file.
 
@@ -66,6 +71,12 @@ The following filters are available for override
 'tribe_widget_builder_get_posts' // change the get_posts() query`
 
 == Changelog ==
+
+= 1.4 =
+
+* Added dashboard widget availability
+* Added disable as sidebar widget option
+* Created new widget_dashboard.php view template
 
 = 1.3 =
 
@@ -98,6 +109,7 @@ The following filters are available for override
 1. List Widget Builder editable widgets.
 1. Highlighting custom widgets in the Widgets/Sidebar page.
 1. How the default display template looks in presentation.
+1. How the default display template looks in the dashboard (when enabled).
 
 == Frequently Asked Questions ==
 

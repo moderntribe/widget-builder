@@ -138,7 +138,23 @@ if ( !class_exists( 'Tribe_Widget_Builder' ) ) {
 		 */
 		public function register_widgets() {
 			foreach ( $this->get_widget_data() as $widget ) {
-				tribe_register_widget('Tribe_Widget_Builder_Display', $widget);
+				if( ! $widget['disable_sidebar'] )
+					tribe_register_widget('Tribe_Widget_Builder_Display', $widget);
+
+				// add dashboard widget
+				if( is_admin() && $widget['dashboard'] ) {
+					add_action( is_multisite() ? 'wp_network_dashboard_setup' : 'wp_dashboard_setup', function( $widget ) use ( $widget ) { 
+						wp_add_dashboard_widget( $widget['token'] . '-' . $widget['ID'], $widget['title'], function( $widget ) use ( $widget ) { 
+
+							// apply filters
+							$content = apply_filters( 'the_content', empty( $widget['content'] ) ? '' : $widget['content'] );
+							$content = str_replace(']]>', ']]&gt;', $content);
+
+							// get template hierarchy
+							include( Tribe_Widget_Builder::get_template_hierarchy( 'widget_dashboard' ) );
+						});
+					});
+				}
 			}
 		}
 
@@ -164,6 +180,8 @@ if ( !class_exists( 'Tribe_Widget_Builder' ) ) {
 						'link_url' => get_post_meta($widget->ID, '_' . Tribe_Widget_Builder::TOKEN . '_link_url', true),
 						'link_text' => get_post_meta($widget->ID, '_' . Tribe_Widget_Builder::TOKEN . '_link_text', true),
 						'widget_description' => get_post_meta($widget->ID, '_' . Tribe_Widget_Builder::TOKEN . '_widget_description', true),
+						'dashboard' => get_post_meta($widget->ID, '_' . Tribe_Widget_Builder::TOKEN . '_dashboard', true),
+						'disable_sidebar' => get_post_meta($widget->ID, '_' . Tribe_Widget_Builder::TOKEN . '_disable_sidebar', true),
 						'token' => Tribe_Widget_Builder::TOKEN
 					);
 				}
@@ -332,7 +350,9 @@ if ( !class_exists( 'Tribe_Widget_Builder' ) ) {
 			global $post_id;
 
 			// setup view fields
-			$field = self::TOKEN . '_widget_description';
+			$field_description = self::TOKEN . '_widget_description';
+			$field_dashboard = self::TOKEN . '_dashboard';
+			$field_disable_sidebar = self::TOKEN . '_disable_sidebar';
 
 			// get template hierarchy
 			include( $this->get_template_hierarchy( 'metabox_admin' ) );
@@ -370,7 +390,7 @@ if ( !class_exists( 'Tribe_Widget_Builder' ) ) {
 			}
 
 			// Authenticated
-			$fields = array( self::TOKEN . '_link_text', self::TOKEN . '_link_url', self::TOKEN . '_widget_description' );
+			$fields = array( self::TOKEN . '_link_text', self::TOKEN . '_link_url', self::TOKEN . '_widget_description', self::TOKEN . '_dashboard', self::TOKEN . '_disable_sidebar' );
 
 			// Parse fields for add, update, delete
 			foreach ( $fields as $f ) {
@@ -408,7 +428,7 @@ if ( !class_exists( 'Tribe_Widget_Builder' ) ) {
 			} else if ( $theme_file = locate_template(array(self::TOKEN . '/' . $template . '_' . $class . '.php')) ) {
 				$file = $theme_file;
 			} else {
-				$file = $this->base_path . '/views/' . $template . '.php';
+				$file = self::get_instance()->base_path . '/views/' . $template . '.php';
 			}
 
 			return apply_filters( self::TOKEN . '_' . $template, $file, $class);
