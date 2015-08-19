@@ -56,9 +56,8 @@ if ( ! class_exists('Tribe_Widget_Builder_Display') ) {
 		 */
 		public function widget( $args, $instance ) {
 
-			global $wp_registered_widgets;
 			extract($args);
-			extract($wp_registered_widgets[ $widget_id ]['data']);
+			extract($this->widget_options['data']);
 
 			// apply filters
 			$content = apply_filters( 'the_content', empty( $content ) ? '' : $content );
