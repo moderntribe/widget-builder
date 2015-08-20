@@ -68,9 +68,5 @@ class Tribe_WP_Widget_Factory extends WP_Widget_Factory {
 	final public function __sleep() {
 		trigger_error( "No serialization allowed!", E_USER_ERROR );
 	}
-
-	protected function __construct() {
-		parent::__construct();
-	}
-
+	
 }
