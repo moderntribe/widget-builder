@@ -1,10 +1,10 @@
 === Widget Builder ===
-Contributors: ModernTribe, codearachnid, peterchester, jbrinley
+Contributors: ModernTribe, codearachnid, peterchester, jbrinley, jazbek
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=R8H3DD84PWAQ2
 Tags: widget, featured image, simple, sidebar, admin, custom post type, CPT, widget-only, dashboard, dashboard widget
 Requires at least: 3.0
 Tested up to: 3.4.2
-Stable tag: 1.6.1
+Stable tag: 1.6.2
 
 == Description ==
 
@@ -73,6 +73,10 @@ The following filters are available for override
 'tribe_widget_builder_get_posts' // change the get_posts() query`
 
 == Changelog ==
+
+= 1.6.2 =
+
+* Fix WordPress 4.3 compatibility issues
 
 = 1.6.1 =
 
